@@ -1,0 +1,23 @@
+import cv2
+import numpy as np
+img = cv2.imread("image1.jpg")
+if img is None:
+    print("Error: image1.jpg not found!")
+    exit()
+cv2.imshow("Original Image", img)
+blank = np.zeros(img.shape[:2], dtype='uint8')
+b, g, r = cv2.split(img)
+blue = cv2.merge([b, blank, blank])
+green = cv2.merge([blank, g, blank])
+red = cv2.merge([blank, blank, r])
+cv2.imshow("Blue", blue)
+cv2.imshow("Green", green)
+cv2.imshow("Red", red)
+print("Original Image Shape :", img.shape)
+print("Blue Channel Shape   :", b.shape)
+print("Green Channel Shape  :", g.shape)
+print("Red Channel Shape    :", r.shape)
+merged = cv2.merge([b, g, r])
+cv2.imshow("Merged Image", merged)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
